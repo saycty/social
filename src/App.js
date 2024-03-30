@@ -1,10 +1,10 @@
 import { Outlet, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import {Home, Login, Profile, Register, ResetPassword} from "./pages"
-
+import {useSelector} from "react-redux";
 
 
 function Layout() {                         //check If the user is logged in
-  const user = null;
+  const {user} = useSelector((state)=>state.user);
   const location = useLocation();
 
   return user?.token ? (                    //if not redirect to login
@@ -13,9 +13,11 @@ function Layout() {                         //check If the user is logged in
     <Navigate to="/login" state={{ from: location }} replace />
   );
 }
-function App() {                              //if logged in user can access protected route
+function App() { 
+  const {theme} = useSelector((state)=>state.theme);
+  //if logged in user can access protected route
   return (
-    <div className="w-full mn-h-[100vh]">
+    <div data-theme={theme} className="w-full mn-h-[100vh]">
       <Routes>        
         <Route element={<Layout/>}>
           <Route path="/" element={<Home/>}/>               

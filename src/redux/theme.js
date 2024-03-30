@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Action } from "@remix-run/router";
+//import { Action } from "@remix-run/router";
 
 //def initial state
 const initialState = {
-  theme: JSON.parse(window?.localStorage.getItem("theme")) ?? "light",
+  theme: JSON.parse(window?.localStorage.getItem("theme")) ?? "dark",
 };
 
 //for manage the theme state
