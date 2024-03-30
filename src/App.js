@@ -6,7 +6,7 @@ import {useSelector} from "react-redux";
 function Layout() {                         //check If the user is logged in
   const {user} = useSelector((state)=>state.user);
   const location = useLocation();
-
+  
   return user?.token ? (                    //if not redirect to login
     <Outlet />
   ) : (
