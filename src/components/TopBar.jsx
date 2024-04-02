@@ -15,7 +15,7 @@ const TopBar = () => {
   const dispatch = useDispatch();
   const {
     register,
-    handelSubmit,
+    handleSubmit,
     formState: { errors },
   } = useForm();
 
@@ -24,7 +24,7 @@ const TopBar = () => {
     dispatch(setTheme(themeValue));
   };
 
-  const handleSearch = async (data) => {};
+  const handleSearch = async (data) => {};              //search funcctionality
 
   return (
     <div
