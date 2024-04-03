@@ -42,7 +42,7 @@ const TopBar = () => {
 
       <form
         className="hidden md:flex items-center justify-center"
-        onSubmit={handelSubmit(handleSearch)}
+        onSubmit={handleSubmit(handleSearch)}
       >
         <TextInput
           placeholder="search..."
