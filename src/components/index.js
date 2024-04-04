@@ -3,11 +3,14 @@ import Loading from "./Loading";
 import CustomButton from "./CustomButton";
 import TopBar from "./TopBar";
 import ProfileCard from "./ProfileCard";
-
+import FriendsCard from "./FriendsCard";
+import PostCard from "./PostCard";
 export {
   Loading,
   TextInput,
   CustomButton,
   TopBar,
-  ProfileCard
+  ProfileCard,
+  FriendsCard,
+  PostCard
 };

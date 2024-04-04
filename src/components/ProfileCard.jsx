@@ -15,7 +15,7 @@ import { UpdateProfile } from "../redux/userSlice";
 import moment from "moment";
 import { FaTwitterSquare } from "react-icons/fa";
 
-const ProfileCard = (user) => {
+const ProfileCard = ({user}) => {
   const { user: data, edit } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   return (
@@ -23,7 +23,7 @@ const ProfileCard = (user) => {
       <div className="w-full bg-primary flex flex-col items-center shadow-sm rounded-xl px-6 py-4 ">
         <div className="w-full flex items-center justify-between border-b pb-5 border-[#66666645]">
         <Link to={"/profile/" + user?._id} className='flex gap-2'>
-            <img
+        <img
               src={user?.profileUrl ?? NoProfile}
               alt={user?.email}
               className='w-14 h-14 object-cover rounded-full'
