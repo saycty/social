@@ -1,13 +1,13 @@
 export const user = {
     _id: "64df3c064180b81adfe41d4b",
-    firstName: "Code",
+    firstName: "Codes",
     lastName: "Wave",
     email: "codewavewithasante@gmail.com",
     friends: [
       {
         _id: "64df3aec4180b81adfe41d32",
-        firstName: "John",
-        lastName: "Bruce",
+        firstName: "Sayan",
+        lastName: "Ghosh",
         email: "john@gmail.com",
         friends: ["64df3c064180b81adfe41d4b", "64df39704180b81adfe41d0b"],
         views: [],
