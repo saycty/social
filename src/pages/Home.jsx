@@ -9,7 +9,7 @@ import {
   Loading,
   PostCard,
 } from "../components";
-import { posts, requests, suggest } from "../assets/data";
+import {   suggest, requests, posts } from "../assets/data";
 import { Link } from "react-router-dom";
 import { NoProfile } from "../assets";
 import { BsPersonFillAdd, BsFiletypeGif } from "react-icons/bs";
