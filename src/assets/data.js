@@ -20,8 +20,8 @@ export const user = {
       },
       {
         _id: "64df39704180b81adfe41d0b",
-        firstName: "James",
-        lastName: "Jackson",
+        firstName: "Ayan",
+        lastName: "Das",
         email: "james@gmail.com",
         friends: ["64df3c064180b81adfe41d4b", "64df3aec4180b81adfe41d32"],
         views: [
@@ -41,8 +41,8 @@ export const user = {
       },
       {
         _id: "64df424b4a4c0d47b5369f65",
-        firstName: "User",
-        lastName: "One",
+        firstName: "Rajdeep",
+        lastName: "Sarkar",
         email: "user!@gmail.com",
         friends: ["64df3c064180b81adfe41d4b"],
         views: [],
@@ -93,24 +93,24 @@ export const user = {
   export const friends = [
     {
       _id: "64df3aec4180b81adfe41d32",
-      firstName: "John",
-      lastName: "Bruce",
+      firstName: "Avijit",
+      lastName: "Bera",
       email: "john@gmail.com",
       profileUrl:
         "https://res.cloudinary.com/djs3wu5bg/image/upload/v1683874470/cld-sample.jpg",
     },
     {
       _id: "64df39704180b81adfe41d0b",
-      firstName: "James",
-      lastName: "Jackson",
+      firstName: "Sayan",
+      lastName: "Chakroborty",
       email: "james@gmail.com",
       location: "Mumbai, India",
       profession: "Full-Stack Developer",
     },
     {
       _id: "64df424b4a4c0d47b5369f65",
-      firstName: "User",
-      lastName: "One",
+      firstName: "Sayani",
+      lastName: "Pal",
       email: "user!@gmail.com",
     },
   ];
@@ -149,8 +149,8 @@ export const user = {
       _id: "64e2fe620d7868ecff1a6a86",
       userId: {
         _id: "64df39704180b81adfe41d0b",
-        firstName: "Chris",
-        lastName: "Omar",
+        firstName: "Priyanka",
+        lastName: "Majumdar",
         profileUrl:
           "https://res.cloudinary.com/djs3wu5bg/image/upload/v1683874454/samples/people/boy-snow-hoodie.jpg",
         location: "New York, USA",
@@ -168,8 +168,8 @@ export const user = {
       _id: "64e1cdd64baffca670364c8c",
       userId: {
         _id: "64df39704180b81adfe41d0b",
-        firstName: "Love",
-        lastName: "Banks",
+        firstName: "Christin",
+        lastName: "Samuel",
         profileUrl:
           "https://res.cloudinary.com/djs3wu5bg/image/upload/v1683874454/samples/people/boy-snow-hoodie.jpg",
         location: "Mumbai, India",

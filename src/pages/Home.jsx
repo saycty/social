@@ -8,6 +8,7 @@ import {
   TextInput,
   Loading,
   PostCard,
+  EditProfile,
 } from "../components";
 import {   suggest, requests, posts } from "../assets/data";
 import { Link } from "react-router-dom";
@@ -17,7 +18,7 @@ import { BiImages, BiSolidVideo } from "react-icons/bi";
 import { useForm } from "react-hook-form";
 
 const Home = () => {
-  const { user } = useSelector((state) => state.user);
+  const { user, edit } = useSelector((state) => state.user);
   const [friendRequest, setFriendRequest] = useState(requests);
   const [suggestedFriends, setSuggestedFriends] = useState(suggest);
   const [errMsg, setErrMsg] = useState("");
@@ -34,8 +35,8 @@ const Home = () => {
   const handlePostSubmit = async (data) => {};
 
   return (
-    <div
-      className="home w-full px-0 lg:px-10 pb-20 2xl:px-40 bg-bgColor 
+    <>
+    <div className="home w-full px-0 lg:px-10 pb-20 2xl:px-40 bg-bgColor 
     lg:rounded-lg h-screen overflow-hidden"
     >
       <TopBar />
@@ -260,6 +261,11 @@ const Home = () => {
         </div>
       </div>
     </div>
+
+    {edit && <EditProfile />}
+
+    </>
+    
   );
 };
 
