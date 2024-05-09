@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import { NoProfile } from "../assets";
-import { BiComment, BiLike, BiSolidLike } from "react-icons/bi";
+import { BiComment, BiLike, BiShare, BiSolidLike } from "react-icons/bi";
 import { MdOutlineDeleteOutline } from "react-icons/md";
 import { useForm } from "react-hook-form";
 import TextInput from "./TextInput";
@@ -217,6 +217,21 @@ const PostCard = ({ post, user, deletePost, likePost }) => {
           <BiComment size={20} />
           {post?.comments?.length} Comments
         </p>
+
+
+
+        
+
+        <p className='flex gap-2 items-center text-base cursor-pointer'>
+          {post?.share?.includes(user?._id) ? (
+            <BiShare size={20} color='blue' />
+          ) : (
+            <BiShare size={20} />
+          )}
+          {post?.likes?.length} Share
+        </p>
+
+
 
         {user?._id === post?.userId?._id && (
           <div
