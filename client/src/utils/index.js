@@ -12,7 +12,7 @@ export const apiRequest=async({url,token,data,method})=>{
     try{
         const result = await API(url,{
             method1 : method || "GET",
-            data: data, 
+            data: data,
             headers:{
                 "content-type":"application/json",
                 Authorization:token?'Bearer ${token}':"",
