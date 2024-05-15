@@ -6,6 +6,7 @@ const postSchema = new mongoose.Schema(
     userId: { type: Schema.Types.ObjectId, ref: "Users" },
     description: { type: String, required: true },
     image: { type: String },
+    video:{type: String},
     likes: [{ type: String }],
     comments: [{ type: Schema.Types.ObjectId, ref: "Comments" }],
   },
@@ -15,3 +16,5 @@ const postSchema = new mongoose.Schema(
 const Posts = mongoose.model("Posts", postSchema);
 
 export default Posts;
+
+

@@ -146,6 +146,7 @@ export const resetPassword = async (req, res) => {
   }
 };
 
+
 export const changePassword = async (req, res, next) => {
   try {
     const { userId, password } = req.body;
@@ -290,8 +291,8 @@ export const friendRequest = async (req, res, next) => {
 
 export const getFriendRequest = async (req, res) => {
   try {
-    const { userId } = req.body.user;
-
+    const { userId } = req.query;
+    
     const request = await FriendRequest.find({
       requestTo: userId,
       requestStatus: "Pending",
