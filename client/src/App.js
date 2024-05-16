@@ -20,7 +20,7 @@ function App() {
     <div data-theme={theme} className="w-full mn-h-[100vh]">
       <Routes>        
         <Route element={<Layout/>}>
-          <Route path="/" element={<Home/>}/>               
+          <Route path="/home" element={<Home/>}/>               
           <Route path="/profile/:id?" element={<Profile/>}/>
         </Route>
         <Route path="/register" element={<Register/>}/>

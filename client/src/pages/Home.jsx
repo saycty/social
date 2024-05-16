@@ -35,6 +35,7 @@ const Home = () => {
   const [suggestedFriends, setSuggestedFriends] = useState([]);
   const [errMsg, setErrMsg] = useState("");
   const [file, setFile] = useState(null);
+  const [videoFile, setVideoFile] = useState(null);
   const [posting, setPosting] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -48,22 +49,18 @@ const Home = () => {
     formState: { errors },
   } = useForm();
 
+
+
+
   const handlePostSubmit = async (data) => {
     setPosting(true);
     setErrMsg("");
     try {
       const uri = file && (await handleFileUpload(file));
-      const newData = uri ? { ...data, image: uri, video: uri } : data;
+      const uriVideo = videoFile && (await handleFileUpload(videoFile));
+      const newData ={ ...data, video: (uriVideo ? uriVideo :'')  , image:(uri ? uri :'') } ;
 
-      if (file) {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = (e) => {
-          setImagePreview(e.target.result);
-        };
-      }
-
-      //console.log("Data to be posted:", newData);
+      console.log("Data to be posted:", newData);
 
       const res = await apiRequest({
         url: "/posts/create-post",
@@ -74,19 +71,16 @@ const Home = () => {
 
       //console.log("API Response:", res);
       //setGetData([res?.data]);
-      if (res?.sucess === true) {
-        await getApiMethod();
-        reset({
-          description: "",
-          image: null,
-        });
-      } else if (res?.status === "failed") {
+    if (res?.status === "failed") {
         setErrMsg(res.data);
       } else {
+        // Reset form fields and fetch posts again
+        await getApiMethod();
         reset({
           description: "",
         });
         setFile(null);
+        setVideoFile(null);
         setErrMsg("");
         // await fetchPost();
       }
@@ -182,7 +176,7 @@ const Home = () => {
 
   return (
     <>
-      <div className="home w-full px-0 lg:px-0 pb-20 2xl:px-0 bg-bgColor lg:rounded-lg h-screen overflow-hidden">
+      <div className="home w-full px-0 lg:px-0 pb-0 2xl:px-0 bg-bgColor lg:rounded-lg h-screen overflow-hidden">
         <TopBar />
 
         <div className="w-full flex gap-2 lg:gap-4 pt-5 pb-10 h-full">
@@ -279,7 +273,7 @@ const Home = () => {
                   <input
                     type="file"
                     data-max-size="5120"
-                    onChange={(e) => setFile(e.target.files[0])}
+                    onChange={(e) => setVideoFile(e.target.files[0])}
                     className="hidden"
                     id="videoUpload"
                     accept=".mp4, .wav"

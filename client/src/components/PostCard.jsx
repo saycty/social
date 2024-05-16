@@ -221,7 +221,7 @@ const PostCard = ({ post, user, deletePost, likePost }) => {
       </div>
 
       <div>
-        <p className="text-ascent-2">
+        <p className="text-ascent-2 px-2">
           {showAll === post?._id
             ? post?.description
             : post?.description.slice(0, 300)}
@@ -253,11 +253,9 @@ const PostCard = ({ post, user, deletePost, likePost }) => {
         )} */}
 
         {post?.image && (
-          <img
-            src={post?.image}
-            className="w-full mt-2 rounded-lg"
-            alt=""
-          />
+          <div className="post-card-image overflow-auto">
+          <img src={post?.image} className="w-full" alt="" />
+        </div>
         )}
         {post?.video && (
           <video

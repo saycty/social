@@ -94,15 +94,15 @@ const ProfileCard = ({user}) => {
           <p className='text-ascent-1 text-lg font-semibold'>Social Profile</p>
 
           <div className='flex gap-2 items-center text-ascent-2'>
-            <BsInstagram className=' text-xl text-ascent-1' />
+            <BsInstagram className=' text-xl text-ascent-1'style={{ color: 'blue' }} />
             <span>Instagram</span>
           </div>
           <div className='flex gap-2 items-center text-ascent-2'>
-            <FaTwitterSquare className=' text-xl text-ascent-1' />
+            <FaTwitterSquare className=' text-xl text-ascent-1'style={{ color: 'blue' }} />
             <span>Twitter</span>
           </div>
           <div className='flex gap-2 items-center text-ascent-2'>
-            <BsFacebook className=' text-xl text-ascent-1' />
+            <BsFacebook className=' text-xl text-ascent-1'style={{ color: 'blue' }} />
             <span>Facebook</span>
           </div>
         </div>

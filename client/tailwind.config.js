@@ -3,8 +3,14 @@ module.exports = {
   content: ["./src/**/*.{html,js,jsx}"],
   theme: {
     colors: {
-      bgColor: "rgb(var(--color-bg) / <alpha-value>)",
-      primary: "rgb(var(--color-primary) / <alpha-value>)",
+      bgColor: {
+        DEFAULT: "rgb(var(--color-bg) / <alpha-value>)",
+        dark: "rgb(var(--color-bg-dark) / <alpha-value>)",  // Add dark theme color
+      },
+      primary: {
+        DEFAULT: "rgb(var(--color-primary) / <alpha-value>)",
+        dark: "rgb(var(--color-primary-dark) / <alpha-value>)",  // Add dark theme color
+      },
       secondary: "rgb(var(--color-secondary) / <alpha-value>)",
       blue: "rgb(var(--color-blue) / <alpha-value>)",
       white: "rgb(var(--color-white) / <alpha-value>)",

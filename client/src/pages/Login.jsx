@@ -40,7 +40,7 @@ const Login = () => {
           setErrMsg("");
           const newData={token:res?.token,...res?.user};
           dispatch(UserLogin(newData))       
-          window.location.replace("/");
+          window.location.replace("/home");
         }
       }
     catch (error) {
