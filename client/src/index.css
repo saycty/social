@@ -15,6 +15,38 @@ top: 0px;
 z-index: 49;
 }
 
+.form-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 656px;
+  margin: 0 auto;
+  padding: 20px;
+  padding-bottom: 2rem;
+  background-color: rgb(var(--color-primary) / var(--tw-bg-opacity));
+  border-radius: 8px; /* Add border radius for a smoother look */
+  min-height: 145px;
+}
+
+.form-container > div:not(:last-child) {
+  /* Style for all sections except the last one (buttons) */
+  border-bottom: 1px solid var(--border-gray); /* Add a border for separation */
+  padding-bottom: 16px; /* Add some padding for better spacing */
+}
+
+@media (max-width: 768px) {
+  /* Styles for smaller screens (less than 768px) */
+  .form-container {
+    flex-wrap: wrap; /* Wrap form sections on smaller screens */
+  }
+
+  .form-container > div:not(:last-child) {
+    width: 100%; /* Make each section take full width on smaller screens */
+  }
+}
+
+
+
 
 .dots-container {
   display: flex;

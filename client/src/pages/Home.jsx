@@ -40,9 +40,6 @@ const Home = () => {
 
   const [imagePreview, setImagePreview] = useState(null);
 
-
-
-
   const dispatch = useDispatch();
   const {
     register,
@@ -56,25 +53,15 @@ const Home = () => {
     setErrMsg("");
     try {
       const uri = file && (await handleFileUpload(file));
-      const newData = uri ? { ...data, image: uri } : data;
+      const newData = uri ? { ...data, image: uri, video: uri } : data;
 
-
-
-
-
-
-      if(file){
-        const reader=new FileReader();
+      if (file) {
+        const reader = new FileReader();
         reader.readAsDataURL(file);
-        reader.onload=(e)=>{
+        reader.onload = (e) => {
           setImagePreview(e.target.result);
         };
       }
-
-
-
-
-
 
       //console.log("Data to be posted:", newData);
 
@@ -89,10 +76,13 @@ const Home = () => {
       //setGetData([res?.data]);
       if (res?.sucess === true) {
         await getApiMethod();
+        reset({
+          description: "",
+          image: null,
+        });
       } else if (res?.status === "failed") {
         setErrMsg(res.data);
       } else {
-        // Reset form fields and fetch posts again
         reset({
           description: "",
         });
@@ -209,13 +199,13 @@ const Home = () => {
           >
             <form
               onSubmit={handleSubmit(handlePostSubmit)}
-              className="bg-primary px-4 rounded-lg"
+              className="form-container"
               style={{
                 width: "100%",
-                maxWidth: "632px",
+                maxWidth: "656px",
                 margin: "0 auto",
                 padding: "20px",
-                maxHeight: "400px",
+                //maxHeight: "400px",
               }}
             >
               <div className="w-full flex items-center gap-2 py-4 border-b border-[#66666645]">
@@ -246,23 +236,26 @@ const Home = () => {
                   {errMsg?.message}
                 </span>
               )}
-              <div className="flex items-center justify-between py-4">
+              <div
+                className="flex items-center justify-between py-4"
+                style={{ marginTop: "-25px" }}
+              >
                 <label
-  htmlFor="imgUpload"
-  className="flex items-center gap-1 text-base text-ascent-2 hover:text-ascent-1 cursor-pointer"
-  title="Upload an image for your post" // Added title attribute
->
-  <input
-    type="file"
-    onChange={(e) => setFile(e.target.files[0])}
-    className="hidden"
-    id="imgUpload"
-    data-max-size="5120"
-    accept=".jpg, .png, .jpeg"
-  />
-  <BiImages />
-  <span>Image</span>
-</label>
+                  htmlFor="imgUpload"
+                  className="flex items-center gap-1 text-base text-ascent-2 hover:text-ascent-1 cursor-pointer"
+                  title="Upload an image for your post" // Added title attribute
+                >
+                  <input
+                    type="file"
+                    onChange={(e) => setFile(e.target.files[0])}
+                    className="hidden"
+                    id="imgUpload"
+                    data-max-size="5120"
+                    accept=".jpg, .png, .jpeg"
+                  />
+                  <BiImages />
+                  <span>Image</span>
+                </label>
 
                 {/* <label
                   className="flex items-center gap-1 text-base text-ascent-2 hover:text-ascent-1 cursor-pointer"
@@ -280,16 +273,16 @@ const Home = () => {
                   <span>Gif</span>
                 </label> */}
                 <label
-                  className='flex items-center gap-1 text-base text-ascent-2 hover:text-ascent-1 cursor-pointer'
-                  htmlFor='videoUpload'
+                  className="flex items-center gap-1 text-base text-ascent-2 hover:text-ascent-1 cursor-pointer"
+                  htmlFor="videoUpload"
                 >
                   <input
-                    type='file'
-                    data-max-size='5120'
+                    type="file"
+                    data-max-size="5120"
                     onChange={(e) => setFile(e.target.files[0])}
-                    className='hidden'
-                    id='videoUpload'
-                    accept='.mp4, .wav'
+                    className="hidden"
+                    id="videoUpload"
+                    accept=".mp4, .wav"
                   />
                   <BiSolidVideo />
                   <span>Video</span>
@@ -310,23 +303,23 @@ const Home = () => {
             </form>
 
             {loading ? (
-    <Loading />
-  ) : getData?.length > 0 ? (
-    getData?.map((post) => (
-      <PostCard
-        key={post?._id}
-        post={post}
-        user={user}
-        deletePost={handleDelete}
-        likePost={handleLikePost}
-      />
-    ))
-  ) : (
-    <div className="flex w-full h-full items-center justify-center">
-      <p className="text-lg text-ascent-2">No Post Available</p>
-    </div>
-  )}
-</div>
+              <Loading />
+            ) : getData?.length > 0 ? (
+              getData?.map((post) => (
+                <PostCard
+                  key={post?._id}
+                  post={post}
+                  user={user}
+                  deletePost={handleDelete}
+                  likePost={handleLikePost}
+                />
+              ))
+            ) : (
+              <div className="flex w-full h-full items-center justify-center">
+                <p className="text-lg text-ascent-2">No Post Available</p>
+              </div>
+            )}
+          </div>
           {/* right */}
           <div className="hidden w-1/4 h-full lg:flex flex-col gap-8 overflow-y-auto">
             {/*friend request */}
