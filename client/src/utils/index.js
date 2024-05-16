@@ -51,8 +51,10 @@ export const handleFileUpload = async (uploadFile) => {
 
 export const fetchPosts = async (token, dispatch, uri, data) => {
   try {
+    const searchTerm = data?.search || ""; // Extract search term or default to empty string
+    const searchUrl = uri || "/posts?search=" + searchTerm;
     const res = await apiRequest({
-      url: uri || "/posts",
+      url: searchUrl || "/posts",
       token: token,
       method: "POST",
       data: data || {},
@@ -105,7 +107,7 @@ export const getUserInfo = async (token, id) => {
       window.alert("User session expired.login again.");
       window.location.replace("/login");
     }
-    console.log("get user info", res);
+    //console.log("get user info", res);
     return res?.user;
   } catch (error) {}
 };

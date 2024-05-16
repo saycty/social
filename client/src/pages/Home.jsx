@@ -13,7 +13,8 @@ import {
 //import { suggest, requests } from "../assets/data";
 import { Link } from "react-router-dom";
 import { NoProfile } from "../assets";
-import { BsPersonFillAdd, BsFiletypeGif } from "react-icons/bs";
+import { BsPersonFillAdd, BsFiletypeGif,BsPersonFillDash} from "react-icons/bs";
+import { IoMdSend } from "react-icons/io";
 import { BiImages, BiSolidVideo } from "react-icons/bi";
 import { useForm } from "react-hook-form";
 import {
@@ -39,6 +40,9 @@ const Home = () => {
   const [posting, setPosting] = useState(false);
   const [loading, setLoading] = useState(false);
 
+
+  //const [friendRequestSent, setFriendRequestSent] = useState([]);
+
   const [imagePreview, setImagePreview] = useState(null);
 
   const dispatch = useDispatch();
@@ -49,18 +53,18 @@ const Home = () => {
     formState: { errors },
   } = useForm();
 
-
-
-
   const handlePostSubmit = async (data) => {
     setPosting(true);
     setErrMsg("");
     try {
       const uri = file && (await handleFileUpload(file));
       const uriVideo = videoFile && (await handleFileUpload(videoFile));
-      const newData ={ ...data, video: (uriVideo ? uriVideo :'')  , image:(uri ? uri :'') } ;
+      const newData = {
+        ...data,
+        video: uriVideo ? uriVideo : "",
+        image: uri ? uri : "",
+      };
 
-      console.log("Data to be posted:", newData);
 
       const res = await apiRequest({
         url: "/posts/create-post",
@@ -69,12 +73,9 @@ const Home = () => {
         method: "POST",
       });
 
-      //console.log("API Response:", res);
-      //setGetData([res?.data]);
-    if (res?.status === "failed") {
+      if (res?.status === "failed") {
         setErrMsg(res.data);
       } else {
-        // Reset form fields and fetch posts again
         await getApiMethod();
         reset({
           description: "",
@@ -82,23 +83,19 @@ const Home = () => {
         setFile(null);
         setVideoFile(null);
         setErrMsg("");
-        // await fetchPost();
       }
       setPosting(false);
     } catch (error) {
-      //console.log("Error posting data:", error);
       setPosting(false);
     }
   };
   const getApiMethod = async () => {
-    //console.log("getApiMethod");
     const res = await apiRequest({
       url: "/posts",
       data: [],
       token: user?.token,
       method: "POST",
     });
-    //console.log("testing get data", res);
     setGetData(res.data);
     setLoading(false);
   };
@@ -108,7 +105,7 @@ const Home = () => {
     setLoading(false);
   };
   const handleLikePost = async (uri) => {
-    console.log("liking", uri);
+    //console.log("liking", uri);
     await likePost({ uri: uri, token: user?.token });
     await getApiMethod();
   };
@@ -123,7 +120,6 @@ const Home = () => {
         token: user?.token,
         method: "POST",
       });
-      console.log("fetch request", res);
       setFriendRequest(res?.data);
     } catch (error) {}
   };
@@ -191,110 +187,115 @@ const Home = () => {
             className="flex-1 h-full px-4 flex flex-col gap-6 overflow-y-auto rounded-lg"
             style={{ overflowY: "auto", maxHeight: "calc(100vh - 80px)" }}
           >
-            <form
-              onSubmit={handleSubmit(handlePostSubmit)}
-              className="form-container"
-              style={{
-                width: "100%",
-                maxWidth: "656px",
-                margin: "0 auto",
-                padding: "20px",
-                //maxHeight: "400px",
-              }}
-            >
-              <div className="w-full flex items-center gap-2 py-4 border-b border-[#66666645]">
-                <img
-                  src={user?.profileUrl ?? NoProfile}
-                  alt="User Image"
-                  className="w-14 h-14 rounded-full object-cover"
-                />
-                <TextInput
-                  styles="w-full rounded-full py-5"
-                  placeholder="What's on your mind...."
-                  name="description"
-                  register={register("description", {
-                    required: "Write something about post",
-                  })}
-                  error={errors.description ? errors.description.message : ""}
-                />
-              </div>
-              {errMsg?.message && (
-                <span
-                  role="alert"
-                  className={`text-sm ${
-                    errMsg?.status === "failed"
-                      ? "text-[#f64949fe]"
-                      : "text-[#2ba150fe]"
-                  } mt-0.5`}
-                >
-                  {errMsg?.message}
-                </span>
-              )}
-              <div
-                className="flex items-center justify-between py-4"
-                style={{ marginTop: "-25px" }}
-              >
-                <label
-                  htmlFor="imgUpload"
-                  className="flex items-center gap-1 text-base text-ascent-2 hover:text-ascent-1 cursor-pointer"
-                  title="Upload an image for your post" // Added title attribute
-                >
-                  <input
-                    type="file"
-                    onChange={(e) => setFile(e.target.files[0])}
-                    className="hidden"
-                    id="imgUpload"
-                    data-max-size="5120"
-                    accept=".jpg, .png, .jpeg"
-                  />
-                  <BiImages />
-                  <span>Image</span>
-                </label>
+      <form
+  onSubmit={handleSubmit(handlePostSubmit)}
+  className="form-container"
+  style={{
+    width: "100%",
+    maxWidth: "656px",
+    margin: "0 auto",
+    padding: "20px",
+    //maxHeight: "400px",
+  }}
+>
+  <div className="w-full flex items-center justify-between gap-2 py-4 border-b border-[#66666645]">
+    <img
+      src={user?.profileUrl ?? NoProfile}
+      alt="User Image"
+      className="w-14 h-14 rounded-full object-cover"
+    />
+   <TextInput
+      styles="w-full rounded-full py-5 px-4 pr-12 position: relative" // Add position: relative for child elements
+      placeholder="What's on your mind...."
+      name="description"
+      register={register("description", {
+        required: "Write something about post",
+        
+      })}
+      error={errors.description ? errors.description.message : ""}
+    >
+      
+    </TextInput>
+    <IoMdSend 
+    style={{
+      fontSize: "2.2rem", 
+      color: "#ccc", 
+    }}
+    />
+    {posting ? (
+      <Loading />
+    ) : (
+      <CustomButton
+        type="submit"
+        title="Post"
+        containerStyles="bg-[#0444a4] text-white py-1 px-4 rounded-full font-semibold text-sm"
+      />
+    )}
+  </div>
+  {errMsg?.message && (
+    <span
+      role="alert"
+      className={`text-sm ${
+        errMsg?.status === "failed"
+          ? "text-[#f64949fe]"
+          : "text-[#2ba150fe]"
+      } mt-0.5`}
+    >
+      {errMsg?.message}
+    </span>
+  )}
+  <div className="flex items-center justify-between py-4">
+    <label
+      htmlFor="imgUpload"
+      className="flex items-center gap-1 text-base text-ascent-2 hover:text-ascent-1 cursor-pointer"
+      title="Upload an image for your post" // Added title attribute
+    >
+      <input
+        type="file"
+        onChange={(e) => setFile(e.target.files[0])}
+        className="hidden"
+        id="imgUpload"
+        data-max-size="5120"
+        accept=".jpg, .png, .jpeg"
+      />
+      <BiImages />
+      <span>Image</span>
+    </label>
 
-                {/* <label
-                  className="flex items-center gap-1 text-base text-ascent-2 hover:text-ascent-1 cursor-pointer"
-                  htmlFor="vgifUpload"
-                >
-                  <input
-                    type="file"
-                    data-max-size="5120"
-                    onChange={(e) => setFile(e.target.files[0])}
-                    className="hidden"
-                    id="vgifUpload"
-                    accept=".gif"
-                  />
-                  <BsFiletypeGif />
-                  <span>Gif</span>
-                </label> */}
-                <label
-                  className="flex items-center gap-1 text-base text-ascent-2 hover:text-ascent-1 cursor-pointer"
-                  htmlFor="videoUpload"
-                >
-                  <input
-                    type="file"
-                    data-max-size="5120"
-                    onChange={(e) => setVideoFile(e.target.files[0])}
-                    className="hidden"
-                    id="videoUpload"
-                    accept=".mp4, .wav"
-                  />
-                  <BiSolidVideo />
-                  <span>Video</span>
-                </label>
+    {/* <label
+      className="flex items-center gap-1 text-base text-ascent-2 hover:text-ascent-1 cursor-pointer"
+      htmlFor="vgifUpload"
+    >
+      <input
+        type="file"
+        data-max-size="5120"
+        onChange={(e) => setFile(e.target.files[0])}
+        className="hidden"
+        id="vgifUpload"
+        accept=".gif"
+      />
+      <BsFiletypeGif />
+      <span>Gif</span>
+    </label> */}
+    <label
+      className="flex items-center gap-1 text-base text-ascent-2 hover:text-ascent-1 cursor-pointer"
+      htmlFor="videoUpload"
+    >
+      <input
+        type="file"
+        data-max-size="5120"
+        onChange={(e) => setVideoFile(e.target.files[0])}
+        className="hidden"
+        id="videoUpload"
+        accept=".mp4, .wav"
+      />
+      <BiSolidVideo />
+      <span>Video</span>
+    </label>
+  </div>
+</form>
 
-                <div>
-                  {posting ? (
-                    <Loading />
-                  ) : (
-                    <CustomButton
-                      type="submit"
-                      title="Post"
-                      containerStyles="bg-[#0444a4] text-white py-1 px-6 rounded-full font-semibold text-sm"
-                    />
-                  )}
-                </div>
-              </div>
-            </form>
+
 
             {loading ? (
               <Loading />

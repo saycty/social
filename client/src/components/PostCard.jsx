@@ -166,8 +166,8 @@ const CommentForm = ({ user, id, replyAt, getComments }) => {
 };
 
 const PostCard = ({ post, user, deletePost, likePost }) => {
-  console.log("result");
-  console.log(post?.likes?.includes(user?._id));
+  //console.log("result");
+  //console.log(post?.likes?.includes(user?._id));
   const [showAll, setShowAll] = useState(0);
   const [showReply, setShowReply] = useState(0);
   const [comments, setComments] = useState([]);
@@ -187,7 +187,7 @@ const PostCard = ({ post, user, deletePost, likePost }) => {
   };
 
   useEffect(() => {
-    console.log(console.log(post?.likes?.includes(user?._id)));
+    //console.log(console.log(post?.likes?.includes(user?._id)));
   }, []);
 
   return (

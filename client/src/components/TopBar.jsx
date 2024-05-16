@@ -43,17 +43,17 @@ const TopBar = () => {
       </Link>
 
       <form
-        className="hidden md:flex items-center justify-center"
+        className=" items-center justify-center"
         onSubmit={handleSubmit(handleSearch)}
       >
-        <div class="search-wrapper border-b border-[#66666645]"onClick={() => document.querySelector('.search-input').focus()}>
+        <div className="search-wrapper bg-secondary border border-[#66666690] outline-none text-sm text-ascent-1 rounded-md"onClick={() => document.querySelector('.search-input').focus()}>
           <input
             type="text"
             placeholder="search..."
-            class="search-input "
+            className="search-input "
             register={register("search")}
           />
-          <button type="submit" class="search-button">
+          <button type="submit" className="search-button">
           <CiSearch />
 
           </button>
@@ -62,21 +62,22 @@ const TopBar = () => {
 
       {/*Icons */}
       <div className="flex gap-4 items-center text-ascent-1 text-md md:text-xl">
-        <button onClick={() => handleTheme()}>
-          {theme ? <BsMoon /> : <BsSunFill />}
-        </button>
-        <div className="hidden lg:flex">
-          <IoMdNotificationsOutline />
-        </div>
-        <div>
-          <CustomButton
-            onClick={() => dispatch(Logout())}
-            title="Log Out"
-            containerStyles="text-sm text-ascent-1 px-4 md:px-6 py-1 md:py-2
-            border border-[#666] rounded-full"
-          />
-        </div>
-      </div>
+  <button onClick={() => handleTheme()}>
+    {theme === "dark" ? <BsSunFill size={20} className="text-ascent-1" /> : <BsMoon  size={20} className="text-ascent-1" />}
+  </button>
+  <div className="hidden lg:flex">
+    <IoMdNotificationsOutline />
+  </div>
+  <div>
+    <CustomButton
+      onClick={() => dispatch(Logout())}
+      title="Log Out"
+      containerStyles="text-sm text-ascent-1 px-4 md:px-6 py-1 md:py-2
+      border border-[#666] rounded-full"
+    />
+  </div>
+</div>
+
     </div>
   );
 };
